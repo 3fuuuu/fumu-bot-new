@@ -5,12 +5,14 @@
     "moduleResolution": "NodeNext",
 
     "rootDir": "./src",
-    "outDir": "./dist",
+    "outDir": "./build",
 
     "strict": true,
 
     "esModuleInterop": true,
+
     "skipLibCheck": true
   },
+
   "include": ["src"]
 }

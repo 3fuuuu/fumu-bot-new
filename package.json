@@ -1,20 +1,23 @@
 {
-  "name": "fumu-bot-new",
-  "description": "ふむふむ、ほーん、、",
+  "name": "fumu-bot",
   "version": "1.0.0",
+  "description": "ふむふむ、ほーん、、",
   "type": "module",
   "scripts": {
     "dev": "tsx watch src/main.ts",
+    "start": "node build/main.js",
     "build": "tsc",
-    "start": "node dist/main.js"
+    "deploy": "tsx src/deploy-commands.ts"
   },
   "dependencies": {
-    "discord.js": "^14.26.4",
-    "dotenv": "^17.4.2"
+    "better-sqlite3": "^12.2.0",
+    "discord.js": "^14.21.0",
+    "dotenv": "^17.2.1"
   },
   "devDependencies": {
-    "@types/node": "^24.0.0",
-    "tsx": "^4.20.0",
-    "typescript": "^5.9.0"
+    "@types/better-sqlite3": "^7.6.13",
+    "@types/node": "^24.0.15",
+    "tsx": "^4.20.5",
+    "typescript": "^5.8.3"
   }
 }
