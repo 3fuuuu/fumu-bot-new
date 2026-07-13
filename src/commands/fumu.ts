@@ -9,23 +9,19 @@ export const data = new SlashCommandBuilder()
       .setDescription("「ふむ」を繰り返す回数")
       .setRequired(true)
       .setMinValue(1)
-      .setMaxValue(10000),
+      .setMaxValue(1000),
   );
 
 export async function execute(
   interaction: ChatInputCommandInteraction,
 ): Promise<void> {
-  console.log("execute start");
-
   const count = interaction.options.getInteger("count", true);
 
-  console.log(count);
+  let message = "";
 
-  const message = Array(count).fill("ふむ").join("");
-
-  console.log("before reply");
+  for (let i = 0; i < count; i++) {
+    message += Math.random() < 0.01 ? "ほーん" : "ふむ";
+  }
 
   await interaction.reply(message);
-
-  console.log("after reply");
 }
