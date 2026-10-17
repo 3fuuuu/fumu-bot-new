@@ -4,7 +4,7 @@ dotenv.config();
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
-
+import { addFumuCount } from "./database.js";
 import {
   ChatInputCommandInteraction,
   Client,
@@ -20,7 +20,11 @@ type Command = {
 };
 
 const client = new Client({
-  intents: [GatewayIntentBits.Guilds],
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+  ],
 });
 
 const commands = new Collection<string, Command>();
@@ -42,6 +46,18 @@ for (const file of fs.readdirSync(commandsPath)) {
 
 client.once(Events.ClientReady, (client) => {
   console.log(`${client.user.tag} Ready!`);
+});
+
+client.on(Events.MessageCreate, (message) => {
+  if (message.author.bot) return;
+
+  const count = (message.content.match(/ふむ/g) ?? []).length;
+
+  if (count === 0) return;
+
+  addFumuCount(message.author.id, count);
+
+  console.log(`${message.author.tag}: 「ふむ」${count}回`);
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
