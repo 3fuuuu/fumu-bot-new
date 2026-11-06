@@ -53,11 +53,13 @@ client.on(Events.MessageCreate, (message) => {
 
   const count = (message.content.match(/ふむ/g) ?? []).length;
 
-  if (count === 0) return;
-
-  addFumuCount(message.author.id, count);
-
-  console.log(`${message.author.tag}: 「ふむ」${count}回`);
+  if (count > 0) {
+    addFumuCount(message.author.id, count);
+    console.log(`${message.author.tag}: 「ふむ」${count}回`);
+  }
+  if (Math.random() < 1 / 20) {
+    message.reply("そーですかっ");
+  }
 });
 
 client.on(Events.InteractionCreate, async (interaction) => {
